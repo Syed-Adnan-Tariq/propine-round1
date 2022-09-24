@@ -39,7 +39,7 @@ reader.on("close", () => {
 axios.get("https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,XRP&tsyms=USD", {params: {fsyms: tokens, tsyms: "USD", }})
  .then(res => {
 //    console.log(res.data);
-   console.log("Token : Value");
+   console.log("Token : Value ($)");
    token_quantity.map(d=> {
     console.log(`${d.token} : ${d.quantity * res.data[d.token].USD}`)
 })
