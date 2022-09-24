@@ -18,16 +18,16 @@ reader.on("line", (row) => {
   }
   else {
     let result  = row.split(",");
-    let index = token_quantity.findIndex(d => d.token == result[2])
+    let index = token_quantity.findIndex(d => d.token == result[header.indexOf('token')])
     if(index > -1) {
-        if(result[1].toLowerCase() == "withdrawal") {
-            token_quantity[index].quantity = parseFloat(token_quantity[index].quantity) - parseFloat(result[3]);
+        if(result[header.indexOf('transaction_type')].toLowerCase() == "withdrawal") {
+            token_quantity[index].quantity = parseFloat(token_quantity[index].quantity) - parseFloat(result[header.indexOf('amount')]);
         }
-        else if(result[1].toLowerCase() == "deposit") {
-            token_quantity[index].quantity = parseFloat(token_quantity[index].quantity) + parseFloat(result[3]);
+        else if(result[header.indexOf('transaction_type')].toLowerCase() == "deposit") {
+            token_quantity[index].quantity = parseFloat(token_quantity[index].quantity) + parseFloat(result[header.indexOf('amount')]);
         }
     } else {
-        token_quantity.push({"token": result[2], "quantity": result[3]});
+        token_quantity.push({"token": result[header.indexOf('token')], "quantity": result[header.indexOf('amount')] });
     }
   }
 
